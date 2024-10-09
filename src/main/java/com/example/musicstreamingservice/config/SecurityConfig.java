@@ -23,18 +23,10 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(){return new SiteUserDetailsService();}
 
-//    @Bean
-//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-//        return http.csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(auth -> auth.requestMatchers("").authenticated())                              //регистарция
-//                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
-//                .build();
-//    }
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll())                                            // доступ ко всем страницам
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()) //  доступ ко всем страницам
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .build();
     }
