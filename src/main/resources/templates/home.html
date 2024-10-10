@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Моя Музыка</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<!-- Header -->
 <header>
     <div class="logo">
         <h1>Моя Музыка</h1>
@@ -17,6 +19,7 @@
         <span>Профиль</span>
     </div>
 </header>
+
 <!-- Sidebar -->
 <aside>
     <ul>
@@ -32,21 +35,28 @@
 <main>
     <h2>Топ треков</h2>
     <div class="track-list">
-        <div class="track">
-            <span>1. Название трека - Исполнитель</span>
-            <button class="play-button">▶</button>
-<!--            <div class="track" th:each="el : ${song}">-->
-<!--                <span th:text="${el.name}">1. Название трека - Исполнитель</span>-->
-<!--                <span th:text="${el.musician}">исполнитель</span>-->
-<!--                <button class="play-button">▶</button>-->
-<!--            </div>-->
+        <div class="track" th:each="el : ${track}">
+            <span th:text="${el.name}">Название трека - Исполнитель</span>
+            <span th:text="${el.artist}">исполнитель</span>
+            <button class="play-button" th:data-id="${el.id}">▶</button>
         </div>
-
     </div>
 </main>
 
-<script src="/PlayTrack.js"></script>
+<!-- Player that pops up from the bottom -->
+<div id="track-player" class="track-player">
+    <div class="track-info">
+        <span id="track-name">Название трека</span>
+        <span id="track-artist">Исполнитель</span>
+    </div>
+    <div class="track-controls">
+        <button id="like-button">❤️</button>
+        <button id="play-pause-button">⏸️</button>
+        <input type="range" id="track-progress" value="0" min="0" max="100">
+    </div>
+    <button id="close-player">Закрыть</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
-
-

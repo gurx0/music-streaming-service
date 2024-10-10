@@ -10,8 +10,8 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "music")
-public class MusicModel {
+@Table(name = "track")
+public class TrackModel {
 
     @Id
     @Column(name = "id" , nullable = false)
@@ -21,17 +21,21 @@ public class MusicModel {
     @Column(name = "name" , nullable = false)
     private String name;
 
+    @Column(name = "artist" , nullable = false)
+    private String artist;
+
     @Column(name = "release"  , nullable = false)
     private Date date;
 
     @Column(name = "views"  , nullable = false)
     private Integer views;
 
-    public MusicModel(){}
+    public TrackModel(){}
 
-    public MusicModel(String name, Date date, Integer views){
+    public TrackModel(String name, Date date,String artist, Integer views){
         this.name = name;
         this.date = date;
+        this.artist = artist;
         this.views = views;
     }
 

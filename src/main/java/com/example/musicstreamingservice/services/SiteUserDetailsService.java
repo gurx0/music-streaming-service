@@ -1,7 +1,7 @@
 package com.example.musicstreamingservice.services;
 
 import com.example.musicstreamingservice.config.SiteUserDetails;
-import com.example.musicstreamingservice.models.SiteUser;
+import com.example.musicstreamingservice.models.UserModel;
 import com.example.musicstreamingservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +18,7 @@ public class SiteUserDetailsService implements UserDetailsService  {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<SiteUser> user = repository.findByName(username);
+        Optional<UserModel> user = repository.findByName(username);
         return user.map(SiteUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
     }

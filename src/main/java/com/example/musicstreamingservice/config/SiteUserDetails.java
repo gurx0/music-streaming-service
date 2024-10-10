@@ -1,21 +1,19 @@
 package com.example.musicstreamingservice.config;
 
-import com.example.musicstreamingservice.models.SiteUser;
-import com.example.musicstreamingservice.services.SiteUserDetailsService;
+import com.example.musicstreamingservice.models.UserModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class SiteUserDetails implements UserDetails {
 
-    private SiteUser user;
+    private UserModel user;
 
-    public SiteUserDetails (SiteUser user){this.user = user;}
+    public SiteUserDetails (UserModel user){this.user = user;}
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

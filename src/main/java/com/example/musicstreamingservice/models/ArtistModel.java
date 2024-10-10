@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Table(name = "ArtistName")
 @Entity
-public class ArtistModell {
+public class ArtistModel {
 
     @Id
     @Column(name = "id")
@@ -18,9 +18,9 @@ public class ArtistModell {
     @Column(name = "name")
     private String name;
 
-    public ArtistModell(){}
+    public ArtistModel(){}
 
-    public ArtistModell(String name){
+    public ArtistModel(String name){
         this.name = name;
     }
 }
