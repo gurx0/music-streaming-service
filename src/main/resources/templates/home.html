@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя Музыка</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<!-- Header -->
+<header>
+    <div class="logo">
+        <h1>Моя Музыка</h1>
+    </div>
+    <div class="search">
+        <input type="text" placeholder="Поиск музыки...">
+    </div>
+    <div class="profile">
+        <span>Профиль</span>
+    </div>
+</header>
+<!-- Sidebar -->
+<aside>
+    <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#">Тренды</a></li>
+        <li><a href="#">Подборки</a></li>
+        <li><a href="#">Плейлисты</a></li>
+        <li><a href="#">Моя музыка</a></li>
+    </ul>
+</aside>
+
+<!-- Main Content -->
+<main>
+    <h2>Топ треков</h2>
+    <div class="track-list">
+        <div class="track">
+            <span>1. Название трека - Исполнитель</span>
+            <button class="play-button">▶</button>
+<!--            <div class="track" th:each="el : ${song}">-->
+<!--                <span th:text="${el.name}">1. Название трека - Исполнитель</span>-->
+<!--                <span th:text="${el.musician}">исполнитель</span>-->
+<!--                <button class="play-button">▶</button>-->
+<!--            </div>-->
+        </div>
+
+    </div>
+</main>
+
+<script src="/PlayTrack.js"></script>
+</body>
+</html>
+
+

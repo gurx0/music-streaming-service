@@ -2,7 +2,6 @@ package com.example.musicstreamingservice.controllers;
 
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SiteController {
 
     @GetMapping("/")
-//    @PreAuthorize("hasAnyAuthority('ROLE_USER')")
     public String home(){
-        return "pages/home";
+        return "home";
     }
 
     @GetMapping("/track/{id}")
