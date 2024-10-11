@@ -44,6 +44,7 @@
 </main>
 
 <!-- Player that pops up from the bottom -->
+<!-- Player that pops up from the bottom -->
 <div id="track-player" class="track-player" style="bottom: -100%;">
     <div class="track-info">
         <span id="track-name">Название трека</span>
@@ -55,8 +56,10 @@
     </audio>
     <div class="track-controls">
         <button id="like-button">❤️</button>
-        <button id="play-pause-button">⏸️</button>
-        <input type="range" id="track-progress" value="0" min="0" max="100">
+        <button id="play-pause-button">▶️</button>
+        <input type="range" id="track-progress" value="0" min="0" max="100" step="1">
+        <label for="volume-control">Громкость:</label>
+        <input type="range" id="volume-control" value="100" min="0" max="100" step="1" style="width: 100px;">
     </div>
     <button id="close-player">Закрыть</button>
 </div>
