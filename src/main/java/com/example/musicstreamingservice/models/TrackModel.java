@@ -25,18 +25,34 @@ public class TrackModel {
     private String artist;
 
     @Column(name = "release"  , nullable = false)
-    private Date date;
+    private Date release;
 
-    @Column(name = "views"  , nullable = false)
-    private Integer views;
+    @Column(name = "playCount"  , nullable = false)
+    private Integer playCount;
+
+    @Column(name = "album"  , nullable = false)
+    private String album;
+
+    @Column(name = "duration"  , nullable = false)
+    private Integer duration;
+
+    @Column(name = "genre"  , nullable = false)
+    private String genre;
+
+    @Column(name = "url"  , nullable = false)
+    private String url;
 
     public TrackModel(){}
 
-    public TrackModel(String name, Date date,String artist, Integer views){
+    public TrackModel(String name, Date release,String artist, Integer playCount, String album, String genre, Integer duration, String url){
         this.name = name;
-        this.date = date;
+        this.release = release;
         this.artist = artist;
-        this.views = views;
+        this.playCount = playCount;
+        this.album = album;
+        this.duration = duration;
+        this.genre = genre;
+        this.url = url;
     }
 
 }

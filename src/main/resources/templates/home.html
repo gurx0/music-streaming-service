@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Моя Музыка</title>
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <!-- Header -->
@@ -41,15 +41,18 @@
             <button class="play-button" th:data-id="${el.id}">▶</button>
         </div>
     </div>
-
 </main>
 
 <!-- Player that pops up from the bottom -->
-<div id="track-player" class="track-player">
+<div id="track-player" class="track-player" style="bottom: -100%;">
     <div class="track-info">
         <span id="track-name">Название трека</span>
         <span id="track-artist">Исполнитель</span>
     </div>
+    <audio id="audio-player" controls>
+        <source id="audio-source" type="audio/mpeg">
+        Ваш браузер не поддерживает аудиоэлемент.
+    </audio>
     <div class="track-controls">
         <button id="like-button">❤️</button>
         <button id="play-pause-button">⏸️</button>
@@ -58,6 +61,6 @@
     <button id="close-player">Закрыть</button>
 </div>
 
-<script src="/PlayTrack.js"></script>
+<script src="/js/PlayTrack.js"></script>
 </body>
 </html>
