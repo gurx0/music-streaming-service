@@ -16,11 +16,12 @@ function playTrackByIndex(index) {
             // Установка названия трека
             document.getElementById('track-name').innerText = trackData.name;
 
-            // Установка названия артиста
+            // Установка названия артистов
             if (trackData.artist && trackData.artist.length > 0) {
-                document.getElementById('track-artist').innerText = trackData.artist[0].name; // Получаем имя первого артиста
+                const artist_names = trackData.artist.map(artist => artist.name).join(', '); // Собираем имена всех артистов
+                document.getElementById('track-artist').innerText = artist_names;
             } else {
-                document.getElementById('track-artist').innerText = 'Неизвестный артист'; // На случай, если артистов нет
+                document.getElementById('track-artist').innerText = 'Неизвестный артист';
             }
 
             // Установка пути к аудиофайлу

@@ -36,11 +36,18 @@
     <h2>Топ треков</h2>
     <div class="track-list">
         <div class="track" th:each="el : ${track}">
+            <!-- Название трека -->
             <span th:if="${el.name != null}" th:text="${el.name}">Название трека</span>
-            <span th:if="${el.artists != null and not #lists.isEmpty(el.artists)}"
-                  th:text="${el.artists}">Исполнитель</span>
-            <button class="play-button" th:data-id="${el.track_id}">▶</button>
+
+            <!-- Исполнители (итерируем список артистов) -->
+            <span th:if="${el.artists != null and not #lists.isEmpty(el.artists)}">
+        <span th:each="artist : ${el.artists}" th:text="${artist.artistName}">Исполнитель</span>
+    </span>
+
+            <!-- Кнопка воспроизведения -->
+            <button class="play-button" th:data-id="${el.id}">▶</button>
         </div>
+
     </div>
 </main>
 

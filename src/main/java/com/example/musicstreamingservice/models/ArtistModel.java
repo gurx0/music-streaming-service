@@ -1,5 +1,6 @@
 package com.example.musicstreamingservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,20 +19,21 @@ public class ArtistModel {
     @Id
     @Column(name = "artist_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long artist_id;
 
-    @Column(name = "name")
-    private String name;
-
-
+    @Column(name = "artist_name")
+    private String artistName;
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+
+
+    @ManyToMany( cascade = CascadeType.ALL)
     @JoinTable(
             name = "artist_tracks",
             joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "track_id")
     )
+    @JsonIgnoreProperties("artist")  // Избегаем рекурсивной зависимости
     private Set<TrackModel> tracks = new HashSet<>();
 
     public void addTrack(TrackModel track) {
@@ -41,7 +43,7 @@ public class ArtistModel {
 
     public ArtistModel(){}
 
-    public ArtistModel(String name){
-        this.name = name;
+    public ArtistModel(String artist_name){
+        this.artistName = artist_name;
     }
 }

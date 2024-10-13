@@ -7,7 +7,8 @@ import com.example.musicstreamingservice.repository.TrackRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Date;
+import java.time.LocalDate; // Импортируем LocalDate
+import java.util.List;
 
 @Service
 public class MusicService {
@@ -21,30 +22,39 @@ public class MusicService {
     }
 
     @Transactional
-    public void addTrackAndArtist(String trackName, String artistName, String album, Integer duration, String genre, String url, String releaseDate) {
+    public void addTrackAndArtist(String track_name, String artist_name, String album, Integer duration, String genre, String url, String releaseDate) {
+
         // Создаем новый трек
         TrackModel track = new TrackModel();
-        track.setName(trackName);
+        track.setName(track_name);
         track.setAlbum(album);
         track.setDuration(duration);
         track.setGenre(genre);
         track.setUrl(url);
-        track.setReleaseDate(Date.valueOf(releaseDate)); // Преобразуем строку в Date
 
+        // Преобразуем строку в LocalDate
+        LocalDate localReleaseDate = LocalDate.parse(releaseDate);
+        track.setReleaseDate(localReleaseDate);
 
-        // Устанавливаем другие поля трека, если необходимо...
+        // Пытаемся найти существующих артистов
+        List<ArtistModel> artists = artistRepository.findByArtistName(artist_name);
+        if (artists.isEmpty()) {
+            // Если артистов нет, создаем нового
+            ArtistModel newArtist = new ArtistModel();
+            newArtist.setArtistName(artist_name);
+            artistRepository.save(newArtist); // Сохраняем нового артиста
+            newArtist.addTrack(track); // Добавляем трек новому артисту
+        } else {
+            // Если артисты найдены, добавляем трек к каждому из них
+            for (ArtistModel artist : artists) {
+                artist.addTrack(track); // Добавляем трек к существующему артисту
+                artistRepository.save(artist); // Сохраняем изменения для артиста
+            }
+        }
 
-        // Создаем нового артиста
-        ArtistModel artist = new ArtistModel();
-        artist.setName(artistName);
-        // Устанавливаем другие поля артиста, если необходимо...
-
-        // Добавляем связь между треком и артистом
-        artist.addTrack(track);
-
-        // Сохраняем артиста, что автоматически сохранит и трек благодаря каскадному сохранению
-        artistRepository.save(artist);
+        // Сохраняем трек, если это необходимо
+        trackRepository.save(track);
     }
 
-}
 
+}

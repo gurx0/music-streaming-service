@@ -9,3 +9,14 @@
 
 оптимизировать css код:  
     убрать задвоения и повторения классов
+
+запрос на добавление музыки
+{
+"trackName": "Song 4",
+"artistName": "Artist 4",
+"album": "Album 4",
+"duration": 200,
+"genre": "Pop",
+"url": "track3.mp3",
+"releaseDate": "2024-10-13"
+}

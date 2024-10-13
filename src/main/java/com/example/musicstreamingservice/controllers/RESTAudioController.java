@@ -39,18 +39,18 @@ public class RESTAudioController {
     }
 
     @PostMapping("/add")
-    public void addTrack(@RequestBody Map<String, String> requestData) {
-
-        String trackName = requestData.get("trackName");
-        String artistName = requestData.get("artistName");
+    public ResponseEntity<String> addTrack(@RequestBody Map<String, String> requestData) {
+        String track_name = requestData.get("track_name");
+        String artist_name = requestData.get("artist_name");
         String album = requestData.get("album");
         Integer duration = Integer.valueOf(requestData.get("duration"));
         String genre = requestData.get("genre");
         String url = requestData.get("url");
         String releaseDate = requestData.get("releaseDate");
 
+        musicService.addTrackAndArtist(track_name, artist_name, album, duration, genre, url, releaseDate);
 
-        musicService.addTrackAndArtist(trackName, artistName, album, duration, genre, url, releaseDate);
+        return ResponseEntity.ok("Трек добавлен успешно");
     }
 
 }
