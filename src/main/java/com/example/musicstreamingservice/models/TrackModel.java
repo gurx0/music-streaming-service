@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.*;
 
 @Getter
 @Setter
@@ -14,21 +14,18 @@ import java.util.Date;
 public class TrackModel {
 
     @Id
-    @Column(name = "id" , nullable = false)
+    @Column(name = "track_id" , nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long track_id;
 
     @Column(name = "name" , nullable = false)
     private String name;
 
-    @Column(name = "artist" , nullable = false)
-    private String artist;
-
-    @Column(name = "release"  , nullable = false)
-    private Date release;
+    @Column(name = "releaseDate"  , nullable = false)
+    private Date releaseDate;
 
     @Column(name = "playCount"  , nullable = false)
-    private Integer playCount;
+    private Integer playCount = 0;
 
     @Column(name = "album"  , nullable = false)
     private String album;
@@ -42,12 +39,27 @@ public class TrackModel {
     @Column(name = "url"  , nullable = false)
     private String url;
 
+
+
+
+
+    @ManyToMany(mappedBy = "tracks")
+    private Set<ArtistModel> artists = new HashSet<>();
+
+    public void addArtist(ArtistModel artist) {
+        artists.add(artist);
+        artist.getTracks().add(this); // Добавляем артиста к треку
+    }
+
+
+
+
+
     public TrackModel(){}
 
-    public TrackModel(String name, Date release,String artist, Integer playCount, String album, String genre, Integer duration, String url){
+    public TrackModel(String name, Date releaseDate, Integer playCount, String album, String genre, Integer duration, String url){
         this.name = name;
-        this.release = release;
-        this.artist = artist;
+        this.releaseDate = releaseDate;
         this.playCount = playCount;
         this.album = album;
         this.duration = duration;

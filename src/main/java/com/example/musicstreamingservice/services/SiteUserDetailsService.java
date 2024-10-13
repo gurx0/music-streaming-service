@@ -18,7 +18,7 @@ public class SiteUserDetailsService implements UserDetailsService  {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserModel> user = repository.findByName(username);
+        Optional<UserModel> user = repository.findByUsername(username);
         return user.map(SiteUserDetails::new)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
     }

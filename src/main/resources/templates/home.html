@@ -37,23 +37,21 @@
     <div class="track-list">
         <div class="track" th:each="el : ${track}">
             <span th:if="${el.name != null}" th:text="${el.name}">Название трека</span>
-            <span th:if="${el.artist != null}" th:text="${el.artist}">Исполнитель</span>
-            <button class="play-button" th:data-id="${el.id}">▶</button>
+            <span th:if="${el.artists != null and not #lists.isEmpty(el.artists)}"
+                  th:text="${el.artists}">Исполнитель</span>
+            <button class="play-button" th:data-id="${el.track_id}">▶</button>
         </div>
     </div>
 </main>
 
 <!-- Player that pops up from the bottom -->
-<!-- Player that pops up from the bottom -->
+<!-- Убираем элемент аудио -->
 <div id="track-player" class="track-player" style="bottom: -100%;">
     <div class="track-info">
         <span id="track-name">Название трека</span>
         <span id="track-artist">Исполнитель</span>
     </div>
-    <audio id="audio-player" controls>
-        <source id="audio-source" type="audio/mpeg">
-        Ваш браузер не поддерживает аудиоэлемент.
-    </audio>
+    <source id="audio-source" type="audio/mpeg">
     <div class="track-controls">
         <button id="like-button">❤️</button>
         <button id="play-pause-button">▶️</button>
@@ -63,6 +61,7 @@
     </div>
     <button id="close-player">Закрыть</button>
 </div>
+
 
 <script src="/js/PlayTrack.js"></script>
 </body>

@@ -17,7 +17,7 @@ public class SiteUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.stream(user.getRoles().split(", "))
+        return Arrays.stream(user.getRole().split(", "))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
