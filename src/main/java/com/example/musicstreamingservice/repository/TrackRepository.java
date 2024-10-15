@@ -14,10 +14,14 @@ public interface TrackRepository extends JpaRepository<TrackModel,Long> {
     @Override
     Optional<TrackModel> findById(Long id);
 
+    Optional<TrackModel> findByUrl(String Url);
+
     TrackModel findByName (String name);
 
     @Query("SELECT t FROM TrackModel t ORDER BY t.id ASC") // или
     List<TrackModel> findAllOrderedById();
+
+
 
 }
 

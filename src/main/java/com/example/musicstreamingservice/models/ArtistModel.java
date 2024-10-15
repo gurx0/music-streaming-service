@@ -38,9 +38,9 @@ public class ArtistModel {
     @JsonIgnoreProperties("artist")  // Избегаем рекурсивной зависимости
     private Set<TrackModel> tracks = new HashSet<>();
 
-    public void addTrack(TrackModel track) {
-        tracks.add(track);
-        track.getArtists().add(this); // Добавляем трек к артисту
+    public synchronized void addTrack(TrackModel track) {
+        this.tracks.add(track);
+        track.getArtists().add(this);
     }
 
     public ArtistModel(){}
@@ -48,4 +48,5 @@ public class ArtistModel {
     public ArtistModel(String artist_name){
         this.artistName = artist_name;
     }
+
 }

@@ -22,7 +22,7 @@ public class TrackService {
     }
 
     @Transactional
-    public void addTrackAndArtist(String track_name, String artist_name, String album, Integer duration, String genre, String track_url, String releaseDate) {
+    public void addTrackAndArtist(String track_name, String artist_name, String album, Integer duration, String genre, String url, String releaseDate) {
 
         // Создаем новый трек
         TrackModel track = new TrackModel();
@@ -30,7 +30,7 @@ public class TrackService {
         track.setAlbum(album);
         track.setDuration(duration);
         track.setGenre(genre);
-        track.setTrackUrl(track_url);
+        track.setUrl(url);
 
         // Преобразуем строку в LocalDate
         LocalDate localReleaseDate = LocalDate.parse(releaseDate);

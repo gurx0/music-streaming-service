@@ -38,8 +38,8 @@ public class TrackModel {
     @Column(name = "genre", nullable = false)
     private String genre;
 
-    @Column(name = "track_url", nullable = false)
-    private String trackUrl;
+    @Column(name = "url", nullable = false)
+    private String url;
 
     @ManyToMany(mappedBy = "tracks" , cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tracks")
@@ -55,13 +55,13 @@ public class TrackModel {
     public TrackModel() {}
 
     // Полный конструктор
-    public TrackModel(String name, LocalDate releaseDate, Integer playCount, String album, String genre, Integer duration, String trackUrl) {
+    public TrackModel(String name, LocalDate releaseDate, Integer playCount, String album, String genre, Integer duration, String url) {
         this.name = name;
         this.releaseDate = releaseDate;
         this.playCount = playCount;
         this.album = album;
         this.duration = duration;
         this.genre = genre;
-        this.trackUrl = getTrackUrl();
+        this.url = getUrl();
     }
 }

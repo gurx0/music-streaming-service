@@ -45,10 +45,10 @@ public class RESTAudioController {
         String album = requestData.get("album");
         Integer duration = Integer.valueOf(requestData.get("duration"));
         String genre = requestData.get("genre");
-        String url = requestData.get("url");
+        String track_url = requestData.get("track_url");
         String releaseDate = requestData.get("releaseDate");
 
-        trackService.addTrackAndArtist(track_name, artist_name, album, duration, genre, url, releaseDate);
+        trackService.addTrackAndArtist(track_name, artist_name, album, duration, genre, track_url, releaseDate);
 
         return ResponseEntity.ok("Трек добавлен успешно");
     }
