@@ -18,7 +18,7 @@ public class TrackModel {
     @Id
     @Column(name = "track_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Приведите к camelCase
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -38,8 +38,8 @@ public class TrackModel {
     @Column(name = "genre", nullable = false)
     private String genre;
 
-    @Column(name = "url", nullable = false)
-    private String url;
+    @Column(name = "track_url", nullable = false)
+    private String trackUrl;
 
     @ManyToMany(mappedBy = "tracks" , cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tracks")
@@ -55,13 +55,13 @@ public class TrackModel {
     public TrackModel() {}
 
     // Полный конструктор
-    public TrackModel(String name, LocalDate releaseDate, Integer playCount, String album, String genre, Integer duration, String url) {
+    public TrackModel(String name, LocalDate releaseDate, Integer playCount, String album, String genre, Integer duration, String trackUrl) {
         this.name = name;
         this.releaseDate = releaseDate;
         this.playCount = playCount;
         this.album = album;
         this.duration = duration;
         this.genre = genre;
-        this.url = url;
+        this.trackUrl = getTrackUrl();
     }
 }

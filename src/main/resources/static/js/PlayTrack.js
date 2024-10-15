@@ -8,20 +8,26 @@ if (typeof audioPlayer === 'undefined') {
 }
 
 // Функция для воспроизведения трека по индексу
+// Функция для воспроизведения трека по индексу
 function playTrackByIndex(index) {
     const trackId = trackList[index];
+
     fetch(`/track/${trackId}`)
         .then(response => response.json())
         .then(trackData => {
             // Установка названия трека
-            document.getElementById('track-name').innerText = trackData.name;
+            document.getElementById('track-name').innerText = trackData.name || 'Без названия';
 
             // Установка названия артистов
-            if (trackData.artist && trackData.artist.length > 0) {
-                const artist_names = trackData.artist.map(artist => artist.name).join(', '); // Собираем имена всех артистов
-                document.getElementById('track-artist').innerText = artist_names;
+            const artistElement = document.getElementById('track-artist');
+            artistElement.innerHTML = ''; // Очищаем элемент перед добавлением новых данных
+
+            if (trackData.artists && trackData.artists.length > 0) {
+                // Собираем имена всех артистов
+                const artistNames = trackData.artists.map(artist => artist.artistName).join(', ');
+                artistElement.innerText = artistNames;
             } else {
-                document.getElementById('track-artist').innerText = 'Неизвестный артист';
+                artistElement.innerText = 'Неизвестный артист';
             }
 
             // Установка пути к аудиофайлу
@@ -34,13 +40,13 @@ function playTrackByIndex(index) {
             // Показать плеер
             document.getElementById('track-player').style.bottom = '0';  // Показываем плеер
         })
-        .catch(error => console.error('Error fetching track:', error));
+        .catch(error => console.error('Ошибка при получении трека:', error));
 
-    // При запуске трека увеличиваем количество прослушиваний
-    fetch(`/track/${trackId}/increment-play-count`, {
-        method: 'PUT'
-    }).catch(error => console.error('Ошибка при увеличении счетчика прослушиваний:', error));
+    // Увеличение количества прослушиваний
+    fetch(`/track/${trackId}/increment-play-count`, { method: 'PUT' })
+        .catch(error => console.error('Ошибка при увеличении счетчика прослушиваний:', error));
 }
+
 
 // Обработчик для кнопки воспроизведения трека
 document.querySelectorAll('.play-button').forEach(button => {

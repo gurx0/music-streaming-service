@@ -1,6 +1,7 @@
 package com.example.musicstreamingservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,8 +25,9 @@ public class ArtistModel {
     @Column(name = "artist_name")
     private String artistName;
 
-
-
+    @Column(name = "avatar_url")
+    @Nullable
+    private String avatarUrl;
 
     @ManyToMany( cascade = CascadeType.ALL)
     @JoinTable(

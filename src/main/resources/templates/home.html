@@ -53,11 +53,18 @@
 
 <!-- Player that pops up from the bottom -->
 <!-- Убираем элемент аудио -->
+<!-- Player that pops up from the bottom -->
 <div id="track-player" class="track-player" style="bottom: -100%;">
     <div class="track-info">
+        <!-- Название трека -->
         <span id="track-name">Название трека</span>
-        <span id="track-artist">Исполнитель</span>
+
+        <!-- Исполнители (если артисты есть, выводим их) -->
+        <span id="track-artist">
+            <!-- Здесь будет динамически добавляться имена артистов через JS -->
+        </span>
     </div>
+
     <source id="audio-source" type="audio/mpeg">
     <div class="track-controls">
         <button id="like-button">❤️</button>

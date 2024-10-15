@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Страница артиста</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- todo доступ к автору по урл айди -->
+<!--TODO переход к автору через ссылку в плеере и списке треков-->
+
+<!-- Страница артиста -->
+<div class="artist-page">
+    <!-- Аватар артиста -->
+    <div class="artist-avatar">
+        <img th:src="@{/images/default-avatar.png}" th:if="${artist.avatarUrl == null}" alt="Аватар артиста">
+        <img th:src="@{${artist.avatarUrl}}" th:if="${artist.avatarUrl != null}" alt="Аватар артиста">
+    </div>
+
+    <!-- Имя артиста -->
+    <div class="artist-info">
+        <h1 th:text="${artist.artistName}">Имя артиста</h1>
+    </div>
+
+    <!-- Список треков артиста -->
+    <div class="artist-tracks">
+        <h2>Треки</h2>
+        <ul>
+            <li th:each="track : ${artist.tracks}">
+                <span th:text="${track.name}">Название трека</span>
+                <button class="play-button" th:data-id="${track.id}">▶</button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Player that pops up from the bottom -->
+<div id="track-player" class="track-player" style="bottom: -100%;">
+    <div class="track-info">
+        <span id="track-name">Название трека</span>
+        <span id="track-artist">Исполнитель</span>
+    </div>
+    <source id="audio-source" type="audio/mpeg">
+    <div class="track-controls">
+        <button id="like-button">❤️</button>
+        <button id="play-pause-button">▶️</button>
+        <input type="range" id="track-progress" value="0" min="0" max="100" step="1">
+        <label for="volume-control">Громкость:</label>
+        <input type="range" id="volume-control" value="100" min="0" max="100" step="1" style="width: 100px;">
+    </div>
+    <button id="close-player">Закрыть</button>
+</div>
+
+<script src="/js/player.js"></script>
+</body>
+</html>

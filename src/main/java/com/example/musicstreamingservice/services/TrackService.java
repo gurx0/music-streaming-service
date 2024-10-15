@@ -11,18 +11,18 @@ import java.time.LocalDate; // Импортируем LocalDate
 import java.util.List;
 
 @Service
-public class MusicService {
+public class TrackService {
 
     private final ArtistRepository artistRepository;  // ваш репозиторий для артистов
     private final TrackRepository trackRepository;    // ваш репозиторий для треков
 
-    public MusicService(ArtistRepository artistRepository, TrackRepository trackRepository) {
+    public TrackService(ArtistRepository artistRepository, TrackRepository trackRepository) {
         this.artistRepository = artistRepository;
         this.trackRepository = trackRepository;
     }
 
     @Transactional
-    public void addTrackAndArtist(String track_name, String artist_name, String album, Integer duration, String genre, String url, String releaseDate) {
+    public void addTrackAndArtist(String track_name, String artist_name, String album, Integer duration, String genre, String track_url, String releaseDate) {
 
         // Создаем новый трек
         TrackModel track = new TrackModel();
@@ -30,7 +30,7 @@ public class MusicService {
         track.setAlbum(album);
         track.setDuration(duration);
         track.setGenre(genre);
-        track.setUrl(url);
+        track.setTrackUrl(track_url);
 
         // Преобразуем строку в LocalDate
         LocalDate localReleaseDate = LocalDate.parse(releaseDate);

@@ -1,6 +1,6 @@
 package com.example.musicstreamingservice.controllers;
 
-import com.example.musicstreamingservice.services.MusicService;
+import com.example.musicstreamingservice.services.TrackService;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
@@ -15,12 +15,12 @@ import java.util.Map;
 public class RESTAudioController {
 
     private final ResourceLoader resourceLoader;
-    private final MusicService musicService;
+    private final TrackService trackService;
 
     // Внедрение сервисов через конструктор
-    public RESTAudioController(ResourceLoader resourceLoader, MusicService musicService) {
+    public RESTAudioController(ResourceLoader resourceLoader, TrackService trackService) {
         this.resourceLoader = resourceLoader;
-        this.musicService = musicService;
+        this.trackService = trackService;
     }
 
     @GetMapping("/{filename:.+}")
@@ -48,7 +48,7 @@ public class RESTAudioController {
         String url = requestData.get("url");
         String releaseDate = requestData.get("releaseDate");
 
-        musicService.addTrackAndArtist(track_name, artist_name, album, duration, genre, url, releaseDate);
+        trackService.addTrackAndArtist(track_name, artist_name, album, duration, genre, url, releaseDate);
 
         return ResponseEntity.ok("Трек добавлен успешно");
     }
