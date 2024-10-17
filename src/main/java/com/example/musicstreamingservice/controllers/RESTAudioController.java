@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/audio") // Опционально, вы можете установить базовый путь
+@RequestMapping("/api/audio")
 public class RESTAudioController {
 
     private final ResourceLoader resourceLoader;
     private final TrackService trackService;
 
-    // Внедрение сервисов через конструктор
     public RESTAudioController(ResourceLoader resourceLoader, TrackService trackService) {
         this.resourceLoader = resourceLoader;
         this.trackService = trackService;
@@ -47,8 +46,10 @@ public class RESTAudioController {
         String genre = requestData.get("genre");
         String track_url = requestData.get("track_url");
         String releaseDate = requestData.get("releaseDate");
+        String photo_url = requestData.get("photo_url");
 
-        trackService.addTrackAndArtist(track_name, artist_name, album, duration, genre, track_url, releaseDate);
+
+        trackService.addTrackAndArtist(track_name, artist_name, album, duration, genre, track_url, releaseDate,photo_url);
 
         return ResponseEntity.ok("Трек добавлен успешно");
     }

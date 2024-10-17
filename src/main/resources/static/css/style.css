@@ -621,5 +621,14 @@ h2 {
 }
 
 #close-player:hover {
-    background-color: #ff6b81; /* Цвет при наведении на кнопку закрытия */
+    background-color: #ff6b81;
+}
+
+.artist-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.artist-link:hover {
+    text-decoration: underline; /* подчеркивание при наведении */
 }

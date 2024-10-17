@@ -9,12 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate; // Импортируем LocalDate
 import java.util.List;
-
 @Service
 public class TrackService {
 
-    private final ArtistRepository artistRepository;  // ваш репозиторий для артистов
-    private final TrackRepository trackRepository;    // ваш репозиторий для треков
+    private final ArtistRepository artistRepository;
+    private final TrackRepository trackRepository;
 
     public TrackService(ArtistRepository artistRepository, TrackRepository trackRepository) {
         this.artistRepository = artistRepository;
@@ -22,39 +21,35 @@ public class TrackService {
     }
 
     @Transactional
-    public void addTrackAndArtist(String track_name, String artist_name, String album, Integer duration, String genre, String url, String releaseDate) {
-
-        // Создаем новый трек
+    public void addTrackAndArtist(String trackName, String artistName,
+                                  String album, Integer duration,
+                                  String genre, String url,
+                                  String releaseDate, String photoUrl) {
+        // новый трек
         TrackModel track = new TrackModel();
-        track.setName(track_name);
+        track.setName(trackName);
         track.setAlbum(album);
         track.setDuration(duration);
         track.setGenre(genre);
         track.setUrl(url);
+        track.setPhotoUrl(photoUrl);
 
-        // Преобразуем строку в LocalDate
         LocalDate localReleaseDate = LocalDate.parse(releaseDate);
         track.setReleaseDate(localReleaseDate);
 
-        // Пытаемся найти существующих артистов
-        List<ArtistModel> artists = artistRepository.findByArtistName(artist_name);
+        List<ArtistModel> artists = artistRepository.findByArtistName(artistName);
+        ArtistModel artist;
+
         if (artists.isEmpty()) {
-            // Если артистов нет, создаем нового
-            ArtistModel newArtist = new ArtistModel();
-            newArtist.setArtistName(artist_name);
-            artistRepository.save(newArtist); // Сохраняем нового артиста
-            newArtist.addTrack(track); // Добавляем трек новому артисту
+            artist = new ArtistModel();
+            artist.setArtistName(artistName);
+            artistRepository.save(artist);
         } else {
-            // Если артисты найдены, добавляем трек к каждому из них
-            for (ArtistModel artist : artists) {
-                artist.addTrack(track); // Добавляем трек к существующему артисту
-                artistRepository.save(artist); // Сохраняем изменения для артиста
-            }
+            artist = artists.get(0);
         }
 
-        // Сохраняем трек, если это необходимо
+        artist.addTrack(track);
         trackRepository.save(track);
     }
-
-
 }
+

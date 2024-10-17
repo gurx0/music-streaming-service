@@ -31,35 +31,31 @@
     </ul>
 </aside>
 
-<!-- Main Content -->
 <main>
     <h2>Топ треков</h2>
     <div class="track-list">
-        <div class="track" th:each="el : ${track}">
-            <!-- Название трека -->
+        <div class="track" th:each="el : ${tracks}">
+            <img th:src="${el.photoUrl}" alt="Обложка трека" class="track-cover" style="width: 50px; height: 50px;"/>
+
             <span th:if="${el.name != null}" th:text="${el.name}">Название трека</span>
 
-            <!-- Исполнители (итерируем список артистов) -->
             <span th:if="${el.artists != null and not #lists.isEmpty(el.artists)}">
-        <span th:each="artist : ${el.artists}" th:text="${artist.artistName}">Исполнитель</span>
-    </span>
+                <span th:each="artist : ${el.artists}" th:text="${artist.artistName}">Исполнитель</span>
+            </span>
 
             <!-- Кнопка воспроизведения -->
             <button class="play-button" th:data-id="${el.id}">▶</button>
         </div>
-
     </div>
 </main>
 
-<!-- Player that pops up from the bottom -->
-<!-- Убираем элемент аудио -->
-<!-- Player that pops up from the bottom -->
 <div id="track-player" class="track-player" style="bottom: -100%;">
     <div class="track-info">
-        <!-- Название трека -->
+
+        <img id="track-cover" alt="Обложка трека" class="track-cover" style="width: 100px; height: 100px;"/>
+
         <span id="track-name">Название трека</span>
 
-        <!-- Исполнители (если артисты есть, выводим их) -->
         <span id="track-artist">
             <!-- Здесь будет динамически добавляться имена артистов через JS -->
         </span>
@@ -75,7 +71,6 @@
     </div>
     <button id="close-player">Закрыть</button>
 </div>
-
 
 <script src="/js/PlayTrack.js"></script>
 </body>

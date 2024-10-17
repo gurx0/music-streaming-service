@@ -20,7 +20,7 @@ public class ArtistModel {
     @Id
     @Column(name = "artist_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long artist_id;
+    private Long id;
 
     @Column(name = "artist_name")
     private String artistName;
@@ -35,8 +35,7 @@ public class ArtistModel {
             joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "track_id")
     )
-    @JsonIgnoreProperties("artist")  // Избегаем рекурсивной зависимости
-    private Set<TrackModel> tracks = new HashSet<>();
+    @JsonIgnoreProperties("artist")     private Set<TrackModel> tracks = new HashSet<>();
 
     public synchronized void addTrack(TrackModel track) {
         this.tracks.add(track);

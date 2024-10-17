@@ -1,2 +1,4 @@
-package com.example.musicstreamingservice.controllers;public class SiteController {
+package com.example.musicstreamingservice.controllers;
+
+public class SiteController {
 }

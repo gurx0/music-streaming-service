@@ -25,10 +25,9 @@ public class ArtistController {
         return "artist-page";
     }
 
-    // Метод для добавления нового артиста
-    @PostMapping // Обрабатывает POST-запросы
+    @PostMapping
     public ResponseEntity<ArtistModel> createArtist(@RequestBody ArtistModel artist) {
-        ArtistModel newArtist = artistService.saveArtist(artist); // Сохраняем артиста через сервис
-        return ResponseEntity.status(HttpStatus.CREATED).body(newArtist); // Возвращаем 201 статус и сохраненного артиста
+        ArtistModel newArtist = artistService.saveArtist(artist);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newArtist);
     }
 }

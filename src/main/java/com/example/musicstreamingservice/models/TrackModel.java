@@ -1,6 +1,7 @@
 package com.example.musicstreamingservice.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +25,7 @@ public class TrackModel {
     private String name;
 
     @Column(name = "releaseDate", nullable = false)
-    private LocalDate releaseDate; // Используем LocalDate вместо Date
+    private LocalDate releaseDate; //  LocalDate вместо Date
 
     @Column(name = "playCount", nullable = false)
     private Integer playCount = 0;
@@ -41,27 +42,30 @@ public class TrackModel {
     @Column(name = "url", nullable = false)
     private String url;
 
+    @Column(name = "photoUrl", nullable = false)
+    private String photoUrl;
+
+
     @ManyToMany(mappedBy = "tracks" , cascade = CascadeType.ALL)
     @JsonIgnoreProperties("tracks")
     private Set<ArtistModel> artists = new HashSet<>();
 
-    // Метод для добавления артиста
     public synchronized void addArtist(ArtistModel artist) {
         artists.add(artist);
-        artist.getTracks().add(this); // Добавляем трек к артисту
+        artist.getTracks().add(this);
     }
 
-    // Конструктор по умолчанию
+
     public TrackModel() {}
 
-    // Полный конструктор
-    public TrackModel(String name, LocalDate releaseDate, Integer playCount, String album, String genre, Integer duration, String url) {
+        public TrackModel(String name, LocalDate releaseDate, Integer playCount, String album, String genre, Integer duration, String url, String photoUrl) {
         this.name = name;
         this.releaseDate = releaseDate;
         this.playCount = playCount;
         this.album = album;
         this.duration = duration;
         this.genre = genre;
-        this.url = getUrl();
+        this.url = url;
+        this.photoUrl = photoUrl;
     }
 }

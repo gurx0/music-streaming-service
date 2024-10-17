@@ -24,8 +24,8 @@ public class TrackController {
 
     @GetMapping("/")
     public String home(Model model){
-        List<TrackModel> track = trackRepository.findAllOrderedById(); // Измените на новый метод
-        model.addAttribute("track", track);
+        List<TrackModel> track = trackRepository.findAllOrderedById();
+        model.addAttribute("tracks", track);
         return "home";
     }
 
@@ -47,7 +47,7 @@ public class TrackController {
         return trackRepository.findById(trackId)
                 .map(track -> {
                     trackRepository.delete(track);
-                    return ResponseEntity.<Void>ok().build();  // Явное указание типа Void
+                    return ResponseEntity.<Void>ok().build();
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -56,11 +56,11 @@ public class TrackController {
     public ResponseEntity<Object> incrementPlayCount(@PathVariable Long trackId) {
         return trackRepository.findById(trackId)
                 .map(track -> {
-                    track.setPlayCount(track.getPlayCount() + 1); // Увеличиваем счетчик
-                    trackRepository.save(track); // Сохраняем изменения
-                    return ResponseEntity.ok().build(); // Возвращаем 200 OK
+                    track.setPlayCount(track.getPlayCount() + 1);
+                    trackRepository.save(track);
+                    return ResponseEntity.ok().build();
                 })
-                .orElse(ResponseEntity.notFound().build()); // Если трек не найден, возвращаем 404
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{filename:.+}")
@@ -71,7 +71,8 @@ public class TrackController {
                 return ResponseEntity.notFound().build();
             }
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+                            resource.getFilename() + "\"")
                     .body(resource);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

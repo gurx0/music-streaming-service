@@ -1,14 +1,10 @@
-// Переменные для списка треков и текущего трека
 let trackList = [];  // Массив для хранения треков
 let currentTrackIndex = -1;  // Индекс текущего трека
 
-// Проверяем, была ли переменная audioPlayer уже объявлена
 if (typeof audioPlayer === 'undefined') {
-    var audioPlayer = new Audio();  // Создаем объект Audio для воспроизведения треков
+    var audioPlayer = new Audio();
 }
 
-// Функция для воспроизведения трека по индексу
-// Функция для воспроизведения трека по индексу
 function playTrackByIndex(index) {
     const trackId = trackList[index];
 
@@ -18,14 +14,30 @@ function playTrackByIndex(index) {
             // Установка названия трека
             document.getElementById('track-name').innerText = trackData.name || 'Без названия';
 
+            // Установка обложки трека
+            const trackCover = document.getElementById('track-cover');
+            trackCover.src = trackData.photoUrl || '/default-cover.png'; // Установка обложки или изображения по умолчанию
+
             // Установка названия артистов
             const artistElement = document.getElementById('track-artist');
             artistElement.innerHTML = ''; // Очищаем элемент перед добавлением новых данных
 
             if (trackData.artists && trackData.artists.length > 0) {
-                // Собираем имена всех артистов
-                const artistNames = trackData.artists.map(artist => artist.artistName).join(', ');
-                artistElement.innerText = artistNames;
+                // Проходим по каждому артисту и создаем ссылку
+                trackData.artists.forEach((artist, index) => {
+                    const artistLink = document.createElement('a');
+                    artistLink.href = `/artist/${artist.artistId}`;  // Ссылка на профиль артиста
+                    artistLink.textContent = artist.artistName; // Имя артиста
+                    artistLink.classList.add('artist-link'); // Добавляем класс для стилей
+
+                    // Добавляем ссылку в элемент
+                    artistElement.appendChild(artistLink);
+
+                    // Добавляем запятую между именами, если это не последний артист
+                    if (index < trackData.artists.length - 1) {
+                        artistElement.appendChild(document.createTextNode(', '));
+                    }
+                });
             } else {
                 artistElement.innerText = 'Неизвестный артист';
             }

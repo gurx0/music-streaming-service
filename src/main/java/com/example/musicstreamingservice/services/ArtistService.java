@@ -17,9 +17,8 @@ public class ArtistService {
                 .orElseThrow(() -> new ResourceNotFoundException("Артист не найден"));
     }
 
-    // Метод для сохранения нового артиста
     public ArtistModel saveArtist(ArtistModel artist) {
-        return artistRepository.save(artist); // Сохраняем артиста в базе данных
+        return artistRepository.save(artist);
     }
 
 }

@@ -13,11 +13,15 @@
 запрос на добавление музыки
 
 {
-    "track_name": "дежавю 2",
-    "artist_name": "Kizaru",
+    "track_name": "Song 4",
+    "artist_name": "Artist 4",
     "album": "Album 4",
     "duration": 200,
-    "genre": "rap",
+    "genre": "Pop",
     "track_url": "track4.mp3",
-    "releaseDate": "2024-10-13"
+    "releaseDate": "2024-10-13",
+    "photo_url": "1.webp"
 }
+
+использовать inmemory db типа h2
+
