@@ -40,8 +40,12 @@
             <span th:if="${el.name != null}" th:text="${el.name}">Название трека</span>
 
             <span th:if="${el.artists != null and not #lists.isEmpty(el.artists)}">
-                <span th:each="artist : ${el.artists}" th:text="${artist.artistName}">Исполнитель</span>
+                <span th:each="artist, iterStat : ${el.artists}">
+                    <a class= "artist-link" th:href="@{/artist/{id}(id=${artist.id})}" th:text="${artist.artistName}">Имя Артиста</a>
+                    <span th:if="${!iterStat.last}">, </span> <!-- Добавляем запятую, если артист не последний -->
+                </span>
             </span>
+
 
             <!-- Кнопка воспроизведения -->
             <button class="play-button" th:data-id="${el.id}">▶</button>

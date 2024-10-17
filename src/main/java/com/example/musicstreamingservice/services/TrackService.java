@@ -4,6 +4,7 @@ import com.example.musicstreamingservice.models.ArtistModel;
 import com.example.musicstreamingservice.models.TrackModel;
 import com.example.musicstreamingservice.repository.ArtistRepository;
 import com.example.musicstreamingservice.repository.TrackRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class TrackService {
     private final ArtistRepository artistRepository;
     private final TrackRepository trackRepository;
 
+    @Autowired
     public TrackService(ArtistRepository artistRepository, TrackRepository trackRepository) {
         this.artistRepository = artistRepository;
         this.trackRepository = trackRepository;
